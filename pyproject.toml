@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "python-checker"
+version = "0.1.0"
+description = "Deterministic Python checker with Ruff, library rules, and static PyTorch shape tracking"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "PyYAML>=6.0",
+    "ruff>=0.4.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.scripts]
+python-checker = "python_checker.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["python_checker*"]
+
+[tool.setuptools.package-data]
+python_checker = ["rules/**/*.yaml"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
